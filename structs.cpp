@@ -39,7 +39,22 @@ loadData(infile, Temp, rows);
 return 0;
 }
 
+
 int loadData(ifstream &infile, Temperature[], int &rows)
 {
-cout << "fuck you";
+string query = "temps.txt";
+string recieved;
+infile.open(query);
+if (!infile)
+{
+  cout << "Can't open file" << endl << "Bye!" << endl;
+  return -1;
+}
+
+while (infile >> recieved)
+{
+cout << recieved << endl; 
+}
+
+
 };
