@@ -30,11 +30,9 @@ int main()
 {
 ifstream infile;
 int rows;
+
 Temperature Temp[12];//where are we getting arr size
-
-
 loadData(infile, Temp, rows);
-
 
 return 0;
 }
@@ -44,6 +42,8 @@ int loadData(ifstream &infile, Temperature[], int &rows)
 {
 string query = "temps.txt";
 string recieved;
+string gotLine;
+int lines = 0;
 infile.open(query);
 if (!infile)
 {
@@ -51,10 +51,15 @@ if (!infile)
   return -1;
 }
 
-while (infile >> recieved)
+while (infile >> recieved) //calcluate # of rows
 {
-cout << recieved << endl; 
+  while(getline(infile, gotLine))
+  {
+    ++lines;
+  }
+  rows = lines;
 }
-
+infile.close();
+   cout << "rows is " << rows << endl;
 
 };
