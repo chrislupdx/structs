@@ -32,7 +32,7 @@ return 0;
 }
 
 
-int loadData(ifstream &infile, Temperature[], int &rows)
+int loadData(ifstream &infile, Temperature[], int &rows) //struct array # declaration how
 {
 string query = "temps.txt";
 string recieved;
@@ -46,6 +46,8 @@ int lows[rows];
 int lines = 0;
 int numOrd = 0;
 int totalNums[24];
+Temperature Temp[12]; //segfaults if you put in rows bc delcaration/order etc
+
 infile.open(query);
 if (!infile)
 {
@@ -71,7 +73,7 @@ while (infile >> recieved) //parse months and parse temps
     totalNums[numOrd] = stoi(recieved); //stores nums with ordinal values
     numOrd++; //count the # of nums coming in 
   }
-  if (recieved.length() >= 3)
+  if (recieved.length() >= 3) //grab months and put them in a string array
   {
    months[monthsIt] = recieved;
    monthsIt++;
@@ -82,17 +84,24 @@ for (int i = 0; i < numOrd; i++) //go throughall the numbres
 {
   if (!(i % 2 == 0)) //odd vals
   {
-    lows[lowsIt] = totalNums[i];
+    lows[lowsIt] = totalNums[i]; //puts low vals into lows
     lowsIt++;
   }
 
   if (i % 2 == 0) //if number ordinal is divisible by 2
   {  
-    highs[highsIt] = totalNums[i];
+    highs[highsIt] = totalNums[i]; //put the high vals into highs
     highsIt++;
   }
 }
 
+for (int i = 0; i < rows; i++) //iterate through mirrors of temp, shoving shit in
+{
+  Temp[i].low = lows[i];
+  Temp[i].high = highs[i];
+  Temp[i].Month = months[i]; 
+  cout << Temp[i].Month << " " << Temp[i].high << " " << Temp[i].low <<  endl;
+}
 
 infile.close();
 return 0;
