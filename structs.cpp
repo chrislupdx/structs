@@ -16,23 +16,48 @@ struct Temperature
   int high; 
 };
 
-int loadData(ifstream &infile, Temperature[], int &rows);
-Temperature findLow ( Temperature [], int rows );
+int loadData(ifstream &infile, Temperature [], int &rows);
+Temperature findLow ( Temperature [], int rows ); //we can call it int loaddata lawl
 Temperature findHigh ( Temperature [], int rows );
 
 int main()
 {
 ifstream infile;
 int rows;
+Temperature Temp[12];
 
-Temperature Temp[12];//where are we getting arr size
 loadData(infile, Temp, rows);
+
+for (int i = 0; i < rows; i++)
+{
+  cout << Temp[i].Month << "fuk" << endl;
+}
+
+
+
+//findHigh(Temp, rows);
 
 return 0;
 }
 
+Temperature findHigh(Temperature Temp[], int rows) //accessing+passing the struct is hard
+{
+  int highest = 1;
 
-int loadData(ifstream &infile, Temperature[], int &rows) //struct array # declaration how
+  Temperature highestTemp[highest];
+  //id the highest temp and return the struct?
+  //int highest = Temperature[0].high;
+  //cout << highest << endl;
+  for (int i = 0; i < rows; i++)
+  {
+  //cout << highestTemp[i].Month << " " << highestTemp[i].high << " " << highestTemp[i].low <<  endl;
+  //cout << Temperature[i].high << endl; //temps are still blank
+  }
+return highestTemp[highest];
+};
+
+
+int loadData(ifstream &infile, Temperature Temp[], int &rows) //struct array # declaration how
 {
 string query = "temps.txt";
 string recieved;
@@ -46,7 +71,7 @@ int lows[rows];
 int lines = 0;
 int numOrd = 0;
 int totalNums[24];
-Temperature Temp[12]; //segfaults if you put in rows bc delcaration/order etc
+//Temperature Temp[12]; //segfaults if you put in rows bc delcaration/order etc
 
 infile.open(query);
 if (!infile)
@@ -63,6 +88,7 @@ while (infile >> recieved) //calcluate # of rows
   }
   rows = lines;
 }
+//cout << "Months in file: " << rows << endl << endl;
 infile.close();
 
 infile.open(query);
@@ -95,12 +121,11 @@ for (int i = 0; i < numOrd; i++) //go throughall the numbres
   }
 }
 
-for (int i = 0; i < rows; i++) //iterate through mirrors of temp, shoving shit in
+for (int i = 0; i < rows; i++) //assign the values to the structs
 {
   Temp[i].low = lows[i];
   Temp[i].high = highs[i];
   Temp[i].Month = months[i]; 
-  cout << Temp[i].Month << " " << Temp[i].high << " " << Temp[i].low <<  endl;
 }
 
 infile.close();
