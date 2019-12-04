@@ -75,21 +75,20 @@ for (int i = 0; i < numOrd; i++) //go throughall the numbres
 {
   if (!(i % 2 == 0)) //odd vals
   {
-  // cout << "i is " << i << setw(15) << totalNums[i] << endl; 
+    lows[lowsIt] = totalNums[i];
     lowsIt++;
   }
 
   if (i % 2 == 0) //if number ordinal is divisible by 2
   {  
   highs[highsIt] = totalNums[i];
-  //cout << "highsIt is " << highsIt << setw(10) << "i is " << i << setw(15) << "totalnums " << totalNums[i] << endl;  
-   highsIt++;
+  highsIt++;
   }
 }
 cout << endl;
 for (int i = 0; i < rows; i++)
 {
- cout << "highs[" << i << "] is " << highs[i] << endl;
+ cout << "lows[" << i << "] is " << lows[i] << endl;
 }
 
 infile.close();
