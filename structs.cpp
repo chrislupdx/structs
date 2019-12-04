@@ -60,6 +60,17 @@ while (infile >> recieved) //calcluate # of rows
   rows = lines;
 }
 infile.close();
-   cout << "rows is " << rows << endl;
+
+infile.open(query);
+while (infile >> recieved) //parse months and parse temps
+{
+//parse text
+  if (recieved.length() == 2) //numbres
+  {
+    cout << recieved << endl;
+  }
+//parse numbers
+}
+infile.close();
 
 };
