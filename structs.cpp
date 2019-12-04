@@ -43,7 +43,13 @@ int loadData(ifstream &infile, Temperature[], int &rows)
 string query = "temps.txt";
 string recieved;
 string gotLine;
+int highsIt = 0; //ordinal counter for high temps
+int lowsIt = 0;
+int highs[rows];
+int lows[rows];
 int lines = 0;
+int numOrd = 0;
+int totalNums[numOrd];
 infile.open(query);
 if (!infile)
 {
@@ -64,13 +70,30 @@ infile.close();
 infile.open(query);
 while (infile >> recieved) //parse months and parse temps
 {
-//parse text
-  if (recieved.length() == 2) //numbres
+  if (recieved.length() == 2) //parse nums
   {
-    cout << recieved << endl;
+    totalNums[numOrd] = stoi(recieved); //stores nums with ordinal values
+    numOrd++; //count the # of nums coming in 
   }
-//parse numbers
 }
+
+for (int i = 0; i < numOrd; i++) //go throughall the numbres
+{
+  if (i % 2 == 0)
+  {   
+//    cout << "I is " << i << " totalNums[i] " << totalNums[i] << endl; //grabbing right ones
+//    cout << "highsIt " << highsIt << endl;
+
+    highs[highsIt] = totalNums[i]; //this transfer is brokend
+    highsIt++;
+  }
+}
+
+for (int i = 0; i < highsIt; i++)
+{
+  cout << "highs[" << i << "] is " << highs[i] << endl;
+}
+
 infile.close();
 
 };
