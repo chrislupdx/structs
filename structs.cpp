@@ -25,35 +25,35 @@ int main()
 ifstream infile;
 int rows;
 Temperature Temp[12];
-
+Temperature Hot;
 loadData(infile, Temp, rows);
 
-for (int i = 0; i < rows; i++)
-{
-  cout << Temp[i].Month << "fuk" << endl;
-}
+//Hot = findHigh(Temp, rows);
+//cout << Hot.Month;
 
+findHigh(Temp, rows);
 
-
-//findHigh(Temp, rows);
 
 return 0;
 }
 
 Temperature findHigh(Temperature Temp[], int rows) //accessing+passing the struct is hard
 {
-  int highest = 1;
-
-  Temperature highestTemp[highest];
-  //id the highest temp and return the struct?
-  //int highest = Temperature[0].high;
-  //cout << highest << endl;
-  for (int i = 0; i < rows; i++)
+  int highest = Temp[0].high;
+  int highIndex;
+  //Temperature highestTemp[highIndex];
+  
+  for (int i = 0; i < rows; i++) //go through the rows and compare vals
   {
-  //cout << highestTemp[i].Month << " " << highestTemp[i].high << " " << highestTemp[i].low <<  endl;
-  //cout << Temperature[i].high << endl; //temps are still blank
+    if (Temp[i].high > highest)
+    { 
+      highest = Temp[i].high; 
+      highIndex = i;//there should be a way to cleanly do this
+      cout << highest << endl; 
+    }
   }
-return highestTemp[highest];
+
+return Temp[highIndex]; //how do we handle you in main
 };
 
 
@@ -71,7 +71,6 @@ int lows[rows];
 int lines = 0;
 int numOrd = 0;
 int totalNums[24];
-//Temperature Temp[12]; //segfaults if you put in rows bc delcaration/order etc
 
 infile.open(query);
 if (!infile)
