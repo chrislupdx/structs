@@ -28,14 +28,36 @@ Temperature Temp[12];
 Temperature Hot;
 loadData(infile, Temp, rows);
 
-//Hot = findHigh(Temp, rows);
-//cout << Hot.Month;
+cout << "hottest month is " << findHigh(Temp, rows).Month <<
+" with temps as high as " << findHigh(Temp, rows).high << endl;
 
-findHigh(Temp, rows);
+cout << "coldest month is " << findLow(Temp, rows).Month << 
+" with temps as low as " << findLow(Temp, rows).low << endl;
 
+//for (int i = 0; i < rows; i++)
+//{
+//  cout << Temp[i].Month << endl;
+//}
 
 return 0;
 }
+
+Temperature findLow(Temperature Temp[], int rows)
+{
+  int lowest = Temp[0].low;
+  int lowIndex;
+  
+  for (int i = 0; i < rows; i++)
+  {
+    if (Temp[i].low < lowest)
+    {
+    lowest = Temp[i].low;
+    lowIndex = i;
+    }
+  }
+return Temp[lowIndex];
+};
+
 
 Temperature findHigh(Temperature Temp[], int rows) //accessing+passing the struct is hard
 {
@@ -49,7 +71,6 @@ Temperature findHigh(Temperature Temp[], int rows) //accessing+passing the struc
     { 
       highest = Temp[i].high; 
       highIndex = i;//there should be a way to cleanly do this
-      cout << highest << endl; 
     }
   }
 
