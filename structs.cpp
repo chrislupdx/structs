@@ -25,19 +25,17 @@ int main()
 ifstream infile;
 int rows;
 Temperature Temp[12];
-Temperature Hot;
+cout << "This program pulls information out of a file and returns the hottest and coldest"
+" months and the relevant temperature." << endl << endl;
+
 loadData(infile, Temp, rows);
 
-cout << "hottest month is " << findHigh(Temp, rows).Month <<
+
+cout << "Hottest month is " << findHigh(Temp, rows).Month <<
 " with temps as high as " << findHigh(Temp, rows).high << endl;
 
-cout << "coldest month is " << findLow(Temp, rows).Month << 
+cout << "Coldest month is " << findLow(Temp, rows).Month << 
 " with temps as low as " << findLow(Temp, rows).low << endl;
-
-//for (int i = 0; i < rows; i++)
-//{
-//  cout << Temp[i].Month << endl;
-//}
 
 return 0;
 }
@@ -47,9 +45,9 @@ Temperature findLow(Temperature Temp[], int rows)
   int lowest = Temp[0].low;
   int lowIndex;
   
-  for (int i = 0; i < rows; i++)
+  for (int i = 0; i < rows; i++) //go through every row
   {
-    if (Temp[i].low < lowest)
+    if (Temp[i].low < lowest) //if the value is lower than lowest, swap it out
     {
     lowest = Temp[i].low;
     lowIndex = i;
@@ -63,7 +61,6 @@ Temperature findHigh(Temperature Temp[], int rows) //accessing+passing the struc
 {
   int highest = Temp[0].high;
   int highIndex;
-  //Temperature highestTemp[highIndex];
   
   for (int i = 0; i < rows; i++) //go through the rows and compare vals
   {
@@ -108,7 +105,6 @@ while (infile >> recieved) //calcluate # of rows
   }
   rows = lines;
 }
-//cout << "Months in file: " << rows << endl << endl;
 infile.close();
 
 infile.open(query);
@@ -133,7 +129,6 @@ for (int i = 0; i < numOrd; i++) //go throughall the numbres
     lows[lowsIt] = totalNums[i]; //puts low vals into lows
     lowsIt++;
   }
-
   if (i % 2 == 0) //if number ordinal is divisible by 2
   {  
     highs[highsIt] = totalNums[i]; //put the high vals into highs
@@ -141,13 +136,16 @@ for (int i = 0; i < numOrd; i++) //go throughall the numbres
   }
 }
 
+cout << "Months in file: " << rows << endl << endl;
+
 for (int i = 0; i < rows; i++) //assign the values to the structs
 {
   Temp[i].low = lows[i];
   Temp[i].high = highs[i];
   Temp[i].Month = months[i]; 
+  cout << Temp[i].Month << " " << Temp[i].high << " " << Temp[i].low << endl;
 }
-
+cout << endl;
 infile.close();
 return 0;
 };
